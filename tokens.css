@@ -1,0 +1,52 @@
+/* ==========================================================================
+   MELAZA STUDIO — tokens de diseño (fuente única de tamaños, interlineados, tracking y radios)
+   Todas las páginas cargan este archivo. Cambiar un valor acá lo cambia en todo el sitio.
+   Guía completa: Guia-de-diseno-Melaza.pdf
+   ========================================================================== */
+:root {
+  /* Tipografía — escala (fluida entre el mínimo en celular y el máximo en pantallas grandes) */
+  --fs-display: clamp(3.2rem, 8.2vw, 7.4rem);    /* solo el título de Sobre mí */
+  --fs-h1:      clamp(2.4rem, 5.4vw, 5rem);      /* título de página / de proyecto */
+  --fs-h2:      clamp(1.8rem, 3.4vw, 3rem);      /* título de sección */
+  --fs-h3:      clamp(1.4rem, 2.4vw, 2.1rem);    /* subtítulo grande */
+  --fs-h4:      clamp(1.1rem, 1.6vw, 1.45rem);   /* subtítulo / título de tarjeta */
+  --fs-lead:    clamp(1rem, 1.3vw, 1.2rem);      /* texto destacado */
+  --fs-body:    clamp(.95rem, 1.1vw, 1.05rem);   /* texto corrido */
+  --fs-small:   .9rem;                           /* botones, navegación, campos */
+  --fs-caption: .78rem;                          /* leyendas, etiquetas */
+  --fs-micro:   .68rem;                          /* datos mínimos */
+
+  /* Interlineado */
+  --lh-display: 1;      /* títulos grandes */
+  --lh-tight:   1.1;    /* títulos */
+  --lh-snug:    1.25;   /* subtítulos y textos cortos */
+  --lh-body:    1.5;    /* texto corrido */
+  --lh-relaxed: 1.7;    /* párrafos largos */
+
+  /* Espaciado entre letras */
+  --ls-tight: -.02em;   /* títulos grandes */
+  --ls-soft:  .02em;
+  --ls-caps:  .06em;    /* mayúsculas pequeñas */
+  --ls-wide:  .1em;     /* mayúsculas de menú */
+
+  /* Radios (píxeles). Círculos: 50% · píldoras: 999px */
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+
+  /* Grilla de 12 columnas: Home, Sobre mí y Contacto (los proyectos no la usan).
+     Medianil = 1,5 rem, un valor de la escala de espaciado (0,25 · 0,5 · 0,75 · 1 · 1,5 · 2 · 3 · 4,5).
+     Home: de margen a margen (5vw, igual que la cabecera). Sobre mí y Contacto (body.narrow): contenedor centrado de hasta 1180 px. */
+  --grid-margin: 5vw;
+  --grid-gutter: 1.5rem;
+  --grid-max: 1180px;
+}
+body {
+  --grid-w: calc(100vw - 2 * var(--grid-margin));                                   /* ancho útil de la grilla */
+  --col: calc((var(--grid-w) - 11 * var(--grid-gutter)) / 12);                      /* ancho de una columna */
+  --slot: calc((var(--grid-w) - 3 * var(--grid-gutter)) / 4);                       /* 3 columnas + sus 2 medianiles: un cuarto de la grilla */
+}
+body.narrow { --grid-w: min(var(--grid-max), calc(100vw - 2 * var(--grid-margin))); }
+/* Mayúscula + G: muestra u oculta las columnas (para revisar alineaciones) */
+body.show-grid::before { content: ""; position: fixed; top: 0; bottom: 0; left: 50%; width: var(--grid-w); transform: translateX(-50%); z-index: 9999; pointer-events: none; background: repeating-linear-gradient(to right, rgba(232,120,109,.22) 0, rgba(232,120,109,.22) var(--col), transparent var(--col), transparent calc(var(--col) + var(--grid-gutter))); }
